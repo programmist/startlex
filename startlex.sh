@@ -11,8 +11,8 @@ fi
 
 vex_env="deus_lex_37"
 deus_lex_home="~/Programming/deus_lex"
-tunnel_script="./tunnel-me-$target.sh"
 
+echo "tunnel-$target"
 # function new_vert_pane() {
 #   # TODO: Open new vertical split pane in iTerm
 # }
@@ -28,7 +28,7 @@ osascript \
 -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
 -e 'tell application "System Events" to tell process "iTerm" to keystroke "cd '$deus_lex_home'"' \
 -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
--e 'tell application "System Events" to tell process "iTerm" to keystroke "'$tunnel_script'"' \
+-e 'tell application "System Events" to tell process "iTerm" to keystroke "gmake 'tunnel-$target'"' \
 -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
 
 
