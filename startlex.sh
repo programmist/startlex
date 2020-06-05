@@ -1,38 +1,43 @@
 #!/usr/local/bin/bash
 
-# TODO: Use function to make more DRY
-# TODO: Add command options: macduff vs prod, etc.
+# TODO: Use functions to make more DRY
 
-if [ "$1" = "prod" ]; then
-  target="primary"
-else
-  target="macduff"
-fi
+# Defaults
+APPLICATION="winslow"
+TARGET="macduff"
 
-vex_env="deus_lex_37"
+while getopts “:a:t:” opt; do
+  case "${opt}" in
+    a) APPLICATION=$OPTARG ;;
+    t) TARGET=$OPTARG ;;
+  esac
+done
+
+case "${APPLICATION}" in
+  winslow) PORT=6543 ;;
+  citadel) PORT=5543 ;;
+  *) PORT=6543 ;;
+esac
+
+vex_env="3.8.2"
 deus_lex_home="~/Programming/deus_lex"
 
-echo "tunnel-$target"
-# function new_vert_pane() {
-#   # TODO: Open new vertical split pane in iTerm
-# }
+echo "Application: $APPLICATION:$PORT"
+echo "Target: $TARGET"
 
-# function return() {
-#   # TODO: Press the Return key
-# }
 
-# Tunnel into macduff
+# Create Tunnel to target environment
 osascript \
 -e 'tell application "iTerm" to activate' \
 -e 'tell application "System Events" to tell process "iTerm" to keystroke "vex '$vex_env'"' \
 -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
 -e 'tell application "System Events" to tell process "iTerm" to keystroke "cd '$deus_lex_home'"' \
 -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
--e 'tell application "System Events" to tell process "iTerm" to keystroke "gmake 'tunnel-$target'"' \
+-e 'tell application "System Events" to tell process "iTerm" to keystroke "gmake 'tunnel-$TARGET'"' \
 -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
 
 
-# Open pserve tab
+# Run pserve in new vertical split pane: 
 osascript \
 -e 'tell application "iTerm" to activate' \
 -e 'tell application "System Events" to tell process "iTerm" to key code 2 using command down' \
@@ -40,11 +45,11 @@ osascript \
 -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
 -e 'tell application "System Events" to tell process "iTerm" to keystroke "cd '$deus_lex_home'"' \
 -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
--e 'tell application "System Events" to tell process "iTerm" to keystroke "pserve --reload ./winslow/dev-tunnel-all-'$target'.ini"' \
+-e 'tell application "System Events" to tell process "iTerm" to keystroke "pserve --reload ./'$APPLICATION'/dev-tunnel-all-'$TARGET'.ini"' \
 -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
 
 
-# Open split pane: gmake winslow-frontend-watch
+# Run the application watch server in new vertical split pane
 osascript \
 -e 'tell application "iTerm" to activate' \
 -e 'tell application "System Events" to tell process "iTerm" to key code 2 using command down' \
@@ -52,11 +57,11 @@ osascript \
 -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
 -e 'tell application "System Events" to tell process "iTerm" to keystroke "cd '$deus_lex_home'"' \
 -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
--e 'tell application "System Events" to tell process "iTerm" to keystroke "gmake winslow-frontend-watch"' \
+-e 'tell application "System Events" to tell process "iTerm" to keystroke "gmake '$APPLICATION-frontend-watch'"' \
 -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
 
 
-# Open git branch tab
+# Change to working directory using virtualenv and run `git branch` in a new tab
 osascript \
 -e 'tell application "iTerm" to activate' \
 -e 'tell application "System Events" to tell process "iTerm" to keystroke "t" using command down' \
@@ -69,4 +74,4 @@ osascript \
 
 
 # Open Winslow in new Chrome tab
-open -a "Google Chrome" http://localhost:6543
+open -a "Google Chrome" http://localhost:$PORT
