@@ -7,13 +7,29 @@
 # Defaults
 APPLICATION="winslow"
 TARGET="macduff"
+PRINT_HELP=0
 
-while getopts “:a:t:” opt; do
+while getopts “:a:t:h” opt; do
   case "${opt}" in
     a) APPLICATION=$OPTARG ;;
     t) TARGET=$OPTARG ;;
+    h) PRINT_HELP=1 ;;
   esac
 done
+
+if [ $PRINT_HELP = 1 ]
+then
+
+cat << EOM
+  Usage: startlex [-option [opt_value]]
+  Options:
+    -a: Application. Values can be "winslow" or "citadel"
+    -t: Target. Values include "macduff" or "primary"
+    -h: Print this help
+EOM
+exit 0
+
+fi
 
 case "${APPLICATION}" in
   winslow) PORT=6543 ;;
