@@ -23,7 +23,7 @@ then
 cat << EOM
   Usage: startlex [-option [opt_value]]
   Options:
-    -a: Application. Values can be "winslow" or "citadel"
+    -a: Application. Values can be "winslow", "citadel", "usertool", or "dashboarding"
     -t: Target. Values include "macduff" or "primary"
     -h: Print this help
 EOM
@@ -34,7 +34,9 @@ fi
 case "${APPLICATION}" in
   winslow) PORT=6543 ;;
   citadel) PORT=5543 ;;
-  *) PORT=6543 ;;
+  usertool) PORT=7654 ;;
+  dashboarding) PORT=6543 ;;
+  *) echo "Error: Invalid application provided to -a. Help: startlex -h" ; exit 1 ;;
 esac
 
 # TODO: Create command line option for virtual env
