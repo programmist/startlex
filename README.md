@@ -35,6 +35,23 @@ startlex.sh [OPTIONS]
       <dd><code>macduff</code></dd>
     </dl>
   </dd>
+  <dt>-e</dt>
+  <dd>
+    The vex virtual environment name.
+    <dl>
+      <dt>Default:</dt>
+      <dd><code>3.8.2</code></dd>
+    </dl>
+  </dd>
+  <dt>-d</dt>
+  <dd>
+    Your `deus_lex` repository root directory
+    <dl>
+      <dt>Default:</dt>
+      <dd><code>~/Programming/deus_lex</code></dd>
+    </dl>
+  </dd>
+
   <dt>-h</dt>
   <dd>Print usage help</dd>
 </dl>
@@ -42,22 +59,34 @@ startlex.sh [OPTIONS]
 
 ### Examples
 
-#### Winslow on Macduff
+#### Winslow on macduff
 Since `winslow` and `macduff` are the default options, this is simply:
 
 ```bash
 startlex.sh
 ```
 
-#### Citadel on Primary
+#### Citadel on primary
 ```bash
 startlex.sh -a citadel -t primary
 ```
 
-#### Winslow on Primary
+#### Winslow on primary
 ```bash
 startlex.sh -t primary
 ```
+
+#### Use a different virtual environment†
+```bash
+startlex.sh -e primary
+```
+
+#### Use a different `deus_lex` home directory†
+```bash
+startlex.sh -d ~/path/to/deus_lex
+```
+
+**†** If you find yourself using the `-e` or `-d` options frequently, you might be better served to modify the `VEX_ENV` or `LEX_HOME_DIR` variables in your copy of the script.
 
 ## Customizing for Your Environment
 This script was written to work specifically with macOS and [iTerm2](https://www.iterm2.com/) with my specific bash environment (`/usr/local/bin/bash`). Much of this can be customized with some tweaks to the script (and, in the one case, a little Googling for the right key codes).

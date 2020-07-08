@@ -7,12 +7,16 @@
 # Defaults
 APPLICATION="winslow"
 TARGET="macduff"
+VEX_ENV="3.8.2"
+LEX_HOME_DIR="~/Programming/deus_lex"
 PRINT_HELP=0
 
-while getopts “:a:t:h” opt; do
+while getopts “:a:t:h:e:d” opt; do
   case "${opt}" in
     a) APPLICATION=$OPTARG ;;
     t) TARGET=$OPTARG ;;
+    e) VEX_ENV=$OPTARG ;;
+    d) LEX_HOME_DIR=$OPTARG ;;
     h) PRINT_HELP=1 ;;
   esac
 done
@@ -39,10 +43,6 @@ case "${APPLICATION}" in
   *) echo "Error: Invalid application provided to -a. Help: startlex -h" ; exit 1 ;;
 esac
 
-# TODO: Create command line option for virtual env
-vex_env="3.8.2"
-deus_lex_home="~/Programming/deus_lex"
-
 echo "Application: $APPLICATION:$PORT"
 echo "Target: $TARGET"
 
@@ -68,9 +68,9 @@ function term_new_tab() {
 # Enter virtual environment and change to deus_lex root directory
 function change_dir_and_vex() {
   osascript \
-  -e 'tell application "System Events" to tell process "iTerm" to keystroke "vex '$vex_env'"' \
+  -e 'tell application "System Events" to tell process "iTerm" to keystroke "vex '$VEX_ENV'"' \
   -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
-  -e 'tell application "System Events" to tell process "iTerm" to keystroke "cd '$deus_lex_home'"' \
+  -e 'tell application "System Events" to tell process "iTerm" to keystroke "cd '$LEX_HOME_DIR'"' \
   -e 'tell application "System Events" to tell process "iTerm" to key code 52'
 }
 
