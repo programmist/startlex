@@ -76,7 +76,7 @@ function change_dir_and_vex() {
 
 
 #***********************#
-#******* Scripts *******#
+#******* Actions *******#
 #***********************#
 
 # Create Tunnel to target environment

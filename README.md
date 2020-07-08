@@ -2,13 +2,15 @@
 A super simple script to automate and orchestrate working locally with Winslow and other web applications in [`deus_lex`](https://github.com/LexMachinaInc/deus_lex) on **macOS**. Nothing fancy, just some bash + AppleScript.
 
 When executed, the script...
-- Opens a tunnel to the target environment in a new iTerm tab
+- Opens a tunnel to the target environment in a new **iTerm** tab
 - Starts `pserve` for the configured application in a vertical split pane
 - Starts a `gmake *-frontend-watch` process for the configured application in a vertical split pane
-- Opens a second iTerm tab in the the local `deus_lex` repo directory  using the configured virtualenv
+- Opens a second **iTerm** tab in the the local `deus_lex` repo directory  using the configured virtualenv
 - Opens a Chrome tab to `localhost`, using the port of the configured application in another split pane
 
 These are all things I found useful, but you may want to customize to your environment/tastes. See the **Customizing for Your Environment** section at the end of this README.
+
+![startlex](https://user-images.githubusercontent.com/527082/86977084-76e55f00-c141-11ea-86ee-351a1a107412.gif)
 
 ## Usage
 ### Synopsis
@@ -106,10 +108,9 @@ The path of the `deus_lex` repo on your machine may differ from the path hard-co
 Change the `"Google Chrome"` potion of the last line to your preferred browser.
 
 ### Change the Tab and Split Pane Actions
-Actions are located in the `Scripts` section (below `Macros` section) beneath a comment describing the action. If you'd like to customize the number or order of tabs/panes that are opened you can do by removing or rearranging some sections. For instance, if you'd rather not open that second iTerm tab you can remove everything in the **# Run `git branch` in a new tab** section.
+Actions are located in the `Actions` section (below `Macros` section) beneath a comment describing the action. If you'd like to customize the number or order of tabs/panes that are opened you can do by removing or rearranging some sections. For instance, if you'd rather not open that second **iTerm** tab you can remove everything in the **# Run `git branch` in a new tab** section.
 
 ### Customize Preferred Terminal Application
-The script assumes iTerm2 is the terminal application. Tweaking it to work with another terminal application is possible, but will require:
-- Finding/replacing instances of "`iTerm`" in the script with your terminal application name
-- Updating some of the `key code` to the correct code for your application. For instance, the `key code` to open a vertical split pane in `iTerm` is `52` with `command down` (AppleScript).
-
+The script assumes **iTerm2** is the terminal application. Tweaking it to work with another terminal application is possible, but will require:
+- Finding/replacing instances of `iTerm` in the script with your terminal application name
+- Updating some of the `key code`-related AppleScript to use the correct code for your terminal application. For instance, the correct AppleScript snippet to open a new vertical split pane in **iTerm** is `key code 2 using command down`.

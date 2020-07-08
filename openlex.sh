@@ -1,5 +1,7 @@
 #!/usr/local/bin/bash
 
+# Start a virtual environment and change to the deus_lex home directory.
+
 vex_env="3.8.2"
 deus_lex_home="~/Programming/deus_lex"
 
