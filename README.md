@@ -91,26 +91,23 @@ startlex.sh -d ~/path/to/deus_lex
 **†** If you find yourself using the `-e` or `-d` options frequently, you might be better served to modify the `VEX_ENV` or `LEX_HOME_DIR` variables in your copy of the script.
 
 ## Customizing for Your Environment
-This script was written to work specifically with macOS and [iTerm2](https://www.iterm2.com/) with my specific bash environment (`/usr/local/bin/bash`). Much of this can be customized with some tweaks to the script (and, in the one case, a little Googling for the right key codes).
+This script was written using `bash` and AppleScript to work with macOS and [iTerm2](https://www.iterm2.com/). However, much of it can also be customized with some tweaks to the script.
 
-### Customize `bash` Executable
-To use a different `bash` executable, just update the `#!` path at the top. If you're unsure where it is on your machine type `which bash` in a terminal to get the path.
+**Note:** The next version of the script will use `screen` or `tmux` so that it's more universally compatible with other operating systems and terminal emulators.
 
-**Note:** If you're using another shell (e.g. `fish`) you may need to do more work to port from `bash` command syntax to your shell's syntax.
-
-### Customize virtual environment
+### 1. Customize virtual environment
 This script has a variable called `vex_env`, which contains the hard-coded name of my current virtual environment. The script could easily be tweaked to make this configurable via command option, if so desired.
 
-### Customize `deus_lex` Repo path
+### 2. Customize `deus_lex` Repo path
 The path of the `deus_lex` repo on your machine may differ from the path hard-coded into the script in the `deus_lex_home` variable. This could also be made configurable via command option if desired.
 
-### Customize Web Browser
+### 3. Customize Web Browser
 Change the `"Google Chrome"` potion of the last line to your preferred browser.
 
-### Change the Tab and Split Pane Actions
+### 4. Change the Tab and Split Pane Actions
 Actions are located in the `Actions` section (below `Macros` section) beneath a comment describing the action. If you'd like to customize the number or order of tabs/panes that are opened you can do by removing or rearranging some sections. For instance, if you'd rather not open that second **iTerm** tab you can remove everything in the **# Run `git branch` in a new tab** section.
 
-### Customize Preferred Terminal Application
+### 5. Customize Preferred Terminal Application
 The script assumes **iTerm2** is the terminal application. Tweaking it to work with another terminal application is possible, but will require:
 - Finding/replacing instances of `iTerm` in the script with your terminal application name
 - Updating some of the `key code`-related AppleScript to use the correct code for your terminal application. For instance, the correct AppleScript snippet to open a new vertical split pane in **iTerm** is `key code 2 using command down`.
